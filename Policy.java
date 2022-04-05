@@ -224,7 +224,7 @@ public class Policy
       
       double price = BASE_FEE;
       
-      // Calculate all the additional fees and add them to the base fee to return the insurance policy price
+      // Calculate all the additional fees and add them to the base fee to return the insurance policy price.
       if(age >= AGE_LIMIT)
       {
          price += OVER_AGE_LIMIT_FEE;
