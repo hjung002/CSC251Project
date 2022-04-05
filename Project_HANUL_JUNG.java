@@ -67,8 +67,5 @@ public class Project_HANUL_JUNG
             numSmokers++;
       }
       
-      // Print out the number of smokers and non-smokers
-      System.out.println("The number of policies with a smoker is: " + numSmokers);
-      System.out.println("The number of policies with a non-smoker is: " + (policyList.size() - numSmokers) );
    }
 }
