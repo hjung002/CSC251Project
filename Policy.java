@@ -8,12 +8,15 @@ public class Policy
    private String policyNumber;     
    private String providerName;     
    
+   public static int numOfPolicies = 0; // Static field to keep track of the number of Policy objects
+   
    // A no-arg constructor that sets the default values for all fields.
    public Policy()
    {
       // Default fields
       policyNumber = "";
       providerName = "";
+      numOfPolicies++;
    }
    
    /**
@@ -25,6 +28,7 @@ public class Policy
    {
       policyNumber = pn;
       providerName = pvn;
+      numOfPolicies++;
    }
    
    // SETTERS
