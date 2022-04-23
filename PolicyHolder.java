@@ -37,7 +37,7 @@ public class PolicyHolder
       this.height = height;
       this.weight = weight;
    }
-
+   
    /**
       Copy Constructor that returns a copy of the PolicyHolder object
       @param obj2 The PolicyHolder to return a copy of
@@ -50,8 +50,8 @@ public class PolicyHolder
       this.smokingStatus = obj2.smokingStatus;
       this.height = obj2.height;
       this.weight = obj2.weight;
-   }  
-
+   }   
+   
    // SETTERS
       
    /**
@@ -173,7 +173,7 @@ public class PolicyHolder
    {
       return (weight * 703) / (height * height);
    }
-
+   
    /**
       The toString method returns the information of the PolicyHolder
       @return A String that describes the PolicyHolder
