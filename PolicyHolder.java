@@ -38,6 +38,20 @@ public class PolicyHolder
       this.weight = weight;
    }
 
+   /**
+      Copy Constructor that returns a copy of the PolicyHolder object
+      @param obj2 The PolicyHolder to return a copy of
+   */
+   public PolicyHolder(PolicyHolder obj2)
+   {
+      this.firstName = obj2.firstName;
+      this.lastName = obj2.lastName;
+      this.age = obj2.age;
+      this.smokingStatus = obj2.smokingStatus;
+      this.height = obj2.height;
+      this.weight = obj2.weight;
+   }  
+
    // SETTERS
       
    /**
