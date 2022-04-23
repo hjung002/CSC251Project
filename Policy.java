@@ -7,27 +7,33 @@ public class Policy
    // Fields
    private String policyNumber;     
    private String providerName;     
+   private PolicyHolder ph; // Aggregation "Has a"
    
-   public static int numOfPolicies = 0; // Static field to keep track of the number of Policy objects
+   public static int numOfPolicies = 0; // Static field to keep track of the number of Policy objects               
    
-   // A no-arg constructor that sets the default values for all fields.
+   /**
+      A no-arg constructor that sets the default values for all fields.
+   */
    public Policy()
    {
       // Default fields
       policyNumber = "";
       providerName = "";
+      ph = new PolicyHolder();
       numOfPolicies++;
    }
    
    /**
       A constructor that accepts arguments.
-      @param pn The policy number
-      @param pvn The provider name
+      @param policyNumber The policy number
+      @param providerName The provider name
+      @param ph The PolicyHolder for the policy
    */
-   public Policy(String pn, String pvn)
+   public Policy(String policyNumber, String providerName, PolicyHolder ph)
    {
-      policyNumber = pn;
-      providerName = pvn;
+      this.policyNumber = policyNumber;
+      this.providerName = providerName;
+      this.ph = new PolicyHolder(ph); // Create a deep copy using the PolicyHolder's copy constructor
       numOfPolicies++;
    }
    
@@ -35,20 +41,20 @@ public class Policy
    
    /**
       The setPolicyNumber method sets the policy number.
-      @param pn The policy number
+      @param policyNumber The policy number
    */
-   public void setPolicyNumber(String pn)
+   public void setPolicyNumber(String policyNumber)
    {
-      policyNumber = pn;
+      this.policyNumber = policyNumber;
    }
    
    /**
       The setProviderName method sets the provider name.
-      @param pvn The provider name
+      @param providerName The provider name
    */
-   public void setProviderName(String pvn)
+   public void setProviderName(String providerName)
    {
-      providerName = pvn;
+      this.providerName = providerName;
    }
       
    // GETTERS
@@ -70,6 +76,15 @@ public class Policy
    {
       return providerName;
    }
+   
+   /**
+      The getPolicyHolder method returns the policyholder.
+      @return The PolicyHolder for the policy
+   */
+   public PolicyHolder getPolicyHolder()
+   {
+      return new PolicyHolder(ph); // Return a copy of the PolicyHolder for the policy using the Copy Constructor
+   }
       
    /**
       The getPrice method returns the price of the insurance policy.
@@ -87,19 +102,19 @@ public class Policy
       double price = BASE_FEE;
       
       // Calculate all the additional fees and add them to the base fee to return the insurance policy price.
-      if(age >= AGE_LIMIT)
+      if(ph.getAge() >= AGE_LIMIT)
       {
          price += OVER_AGE_LIMIT_FEE;
       }
       
-      if(smokingStatus.equalsIgnoreCase("smoker"))
+      if(ph.getSmokingStatus().equalsIgnoreCase("smoker"))
       {
          price += SMOKER_FEE;
       }
       
-      if(getBMI() >= BMI_LIMIT)
+      if(ph.getBMI() >= BMI_LIMIT)
       {
-         price += (getBMI()-BMI_LIMIT) * BMI_FEE;
+         price += (ph.getBMI()-BMI_LIMIT) * BMI_FEE;
       }
       
       return price;
@@ -112,6 +127,7 @@ public class Policy
    {
       return String.format("Policy Number: " + policyNumber +
                            "\nProvider Name: " + providerName +
+                           "\n" + ph + // Implicitly calling the PolicyHolder's toString() method
                            "\nPolicy Price: $%.2f", getPrice());
    }
 }
