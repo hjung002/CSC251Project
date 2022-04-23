@@ -6,6 +6,7 @@ public class Policy
 {
    // Fields
    private String policyNumber;     
+<<<<<<< Updated upstream
    private String providerName;     
    private String firstName;        
    private String lastName;         
@@ -13,6 +14,12 @@ public class Policy
    private String smokingStatus;    
    private double height;           
    private double weight;           
+=======
+   private String providerName;
+   private PolicyHolder ph; // Aggregation "Has a"
+   
+   public static int numOfPolicies = 0; // Static field to keep track of the number of Policy objects               
+>>>>>>> Stashed changes
    
    // A no-arg constructor that sets the default values for all fields.
    public Policy()
@@ -20,18 +27,24 @@ public class Policy
       // Default fields
       policyNumber = "";
       providerName = "";
+<<<<<<< Updated upstream
       firstName = "";
       lastName = "";
       age = 0;
       smokingStatus = "";
       height = 0;
       weight = 0;
+=======
+      ph = new PolicyHolder();
+      numOfPolicies++;
+>>>>>>> Stashed changes
    }
    
    /**
       A constructor that accepts arguments.
       @param pn The policy number
       @param pvn The provider name
+<<<<<<< Updated upstream
       @param fn The policyholder's first name
       @param ln The policyholder's last name
       @param a The policyholder's age
@@ -49,28 +62,39 @@ public class Policy
       smokingStatus = ss;
       height = h;
       weight = w;
+=======
+      @param ph The PolicyHolder for the policy
+   */
+   public Policy(String pn, String pvn, PolicyHolder ph)
+   {
+      policyNumber = pn;
+      providerName = pvn;
+      this.ph = new PolicyHolder(ph); // Create a deep copy using the PolicyHolder's copy constructor
+      numOfPolicies++;
+>>>>>>> Stashed changes
    }
    
    // SETTERS
    
    /**
       The setPolicyNumber method sets the policy number.
-      @param pn The policy number
+      @param policyNumber The policy number
    */
-   public void setPolicyNumber(String pn)
+   public void setPolicyNumber(String policyNumber)
    {
-      policyNumber = pn;
+      this.policyNumber = policyNumber;
    }
    
    /**
       The setProviderName method sets the provider name.
-      @param pvn The provider name
+      @param providerName The provider name
    */
-   public void setProviderName(String pvn)
+   public void setProviderName(String providerName)
    {
-      providerName = pvn;
+      this.providerName = providerName;
    }
    
+<<<<<<< Updated upstream
    /**
       The setFirstName method sets the policyholder's first name.
       @param fn The policyholder's first name
@@ -125,6 +149,8 @@ public class Policy
       weight = w;
    }
    
+=======
+>>>>>>> Stashed changes
    // GETTERS
    
    /**
@@ -146,6 +172,7 @@ public class Policy
    }
    
    /**
+<<<<<<< Updated upstream
       The getFirstName method returns the policyholder's first name.
       @return The policyholder's first name
    */
@@ -209,6 +236,16 @@ public class Policy
       return (weight * 703) / (height * height);
    }
    
+=======
+      The getPolicyHolder method returns the policyholder.
+      @return The PolicyHolder for the policy
+   */
+   public PolicyHolder getPolicyHolder()
+   {
+      return new PolicyHolder(ph); // Return a copy of the PolicyHolder for the policy using the Copy Constructor
+   } 
+      
+>>>>>>> Stashed changes
    /**
       The getPrice method returns the price of the insurance policy.
       @return The price of the insurance policy
@@ -225,19 +262,19 @@ public class Policy
       double price = BASE_FEE;
       
       // Calculate all the additional fees and add them to the base fee to return the insurance policy price.
-      if(age >= AGE_LIMIT)
+      if(ph.getAge() >= AGE_LIMIT)
       {
          price += OVER_AGE_LIMIT_FEE;
       }
       
-      if(smokingStatus.equalsIgnoreCase("smoker"))
+      if(ph.getSmokingStatus().equalsIgnoreCase("smoker"))
       {
          price += SMOKER_FEE;
       }
       
-      if(getBMI() >= BMI_LIMIT)
+      if(ph.getBMI() >= BMI_LIMIT)
       {
-         price += (getBMI()-BMI_LIMIT) * BMI_FEE;
+         price += (ph.getBMI()-BMI_LIMIT) * BMI_FEE;
       }
       
       return price;
@@ -246,6 +283,7 @@ public class Policy
    // Displays information about the Policy
    public void displayInformation()
    {
+<<<<<<< Updated upstream
       System.out.println("Policy Number: " + policyNumber);
       System.out.println("Provider Name: " + providerName);
       System.out.println("Policyholder's First Name: " + firstName);
@@ -256,5 +294,11 @@ public class Policy
       System.out.println("Policyholder's Weight: " + weight + " pounds");
       System.out.printf("Policyholder's BMI: %.2f\n", getBMI());
       System.out.printf("Policy Price: $%.2f\n", getPrice());
+=======
+      return String.format("Policy Number: " + policyNumber +
+                           "\nProvider Name: " + providerName +
+                           "\n" + ph + // Implicitly calling the PolicyHolder's toString() method
+                           "\nPolicy Price: $%.2f", getPrice());
+>>>>>>> Stashed changes
    }
 }
