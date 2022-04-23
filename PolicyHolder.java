@@ -159,4 +159,19 @@ public class PolicyHolder
    {
       return (weight * 703) / (height * height);
    }
+
+   /**
+      The toString method returns the information of the PolicyHolder
+      @return A String that describes the PolicyHolder
+   */
+   public String toString()
+   {
+      return String.format("Policyholder's First Name: " + firstName + 
+                           "\nPolicyholder's Last Name: " + lastName + 
+                           "\nPolicyholder's Age: " + age +
+                           "\nPolicyholder's Smoking Status: " + smokingStatus +
+                           "\nPolicyholder's Height: " + height + " inches" +
+                           "\nPolicyholder's Weight: " + weight + " pounds" +
+                           "\nPolicyholder's BMI: %.2f" , getBMI());
+   }
 }
